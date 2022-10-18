@@ -1,7 +1,11 @@
+//--- node modules ---
+
+// Allows inquirer to be used in program - 
 const inquirer = require('inquirer');
-const fs = require('fs')
-const { message } = require('statuses');
-const { title } = require('process');
+// Allows filesave to be used in program - 
+const fs = require('fs');
+
+
 
 inquirer.prompt (
     [
@@ -9,23 +13,36 @@ inquirer.prompt (
             type: 'input'.
             message = "What's the project title?",
             name: 'title',
-            validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+            validate: (value) => { 
+                if(value){return true} 
+                else {return 'i need a value to continue'}
+            }
         }
     ]
 )
 
+.then(({
+    title   
+}) => {
 
+const template =`# ${title}`
+    createReadmeFile(title, template)
+});
 
+function createReadmeFile(fileName, data) {
 
+// Filesave code 
+fs.writeFile(`./generated-${fileName.toLowerCase().split(' ').join('')}.md`,data,(err)=>{
+    if (err){
+        console.log(err)
+    } console.log("README generated!");
+})
 
-//console.log(process.argv);
-// I need to use argv to get the user input --
+}
 
 
 //WHEN I am prompted for information about my application repository
 //THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
-
 
 
 //WHEN I enter my project title

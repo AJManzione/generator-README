@@ -1,2 +1,3 @@
-# generator-README
-Assists on creating a README markdown file using node.js
+# README Generator!
+
+## A terminal readme generaor that takes in user input and outputs a README.md file!
