@@ -1,5 +1,7 @@
 //WHEN I am prompted for information about my application repository
 //THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions --
+//WHEN I choose a license for my application from a list of options
+//THEN a badge for that license is added near the top of the README 
 
 // title  (check)
 // description (check)
@@ -9,7 +11,7 @@
 // license   (check)
 // contributing  (check)
 // tests   ()
-// questions    ()
+// questions  ()
 
 
 //--- node modules ---
@@ -24,8 +26,6 @@ const { type } = require('os');
 
             /* TITLE */ 
 
-//WHEN I enter my project title
-//THEN this is displayed as the title of the README
 inquirer.prompt (
     [
         {
@@ -50,19 +50,14 @@ inquirer.prompt (
             }
         },
 
-        
-
-
             /* LICENSE */
 
-//WHEN I choose a license for my application from a list of options
-//THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-            
+
         {
             type: 'list',
             message: "What license did you use?",
             name: 'license',
-            choices: ['Apache License 2.0', 'GNU General Public License v3.0', 'MIT License', 'BSD 2-Clause "Simplified" License', 'BSD 3-Clause "New" or "Revised" License', 'Boost Software License 1.0', 'Creative Commons Zero v1.0 Universal', 'Eclipse Public License 2.0', 'GNU Affero General Public License v3.0', 'GNU General Public License v2.0', 'GNU Lesser General Public License v2.1', 'Mozilla Public License 2.0', 'The Unlicense'],
+            choices: ['Apache License 2.0', 'MIT License', 'BSD 2-Clause "Simplified" License', 'BSD 3-Clause "New" or "Revised" License', 'Boost Software License 1.0', 'Creative Commons Zero v1.0 Universal', 'Eclipse Public License 1.0', 'GNU Affero General Public License v3.0', 'GNU Lesser General Public License v3.0',' GNU General Public License v3.0',  'GNU General Public License v2.0',  'Mozilla Public License 2.0', 'The Unlicense'],
             validate: (value) => { 
                 if(value){return true} 
                 else {return "i need a value to continue"}
@@ -102,10 +97,9 @@ inquirer.prompt (
                 }
         },
 
+
             /* GITHUB USERNAME */
 
-//WHEN I enter my GitHub username
-//THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
 
         {
             type: 'input',
@@ -117,12 +111,7 @@ inquirer.prompt (
                 }
         },
         
-
-
             /* EMAIL ADDRESS */
-
-//WHEN I enter my email address
-//THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
           
         {
             type: 'input',
@@ -134,9 +123,6 @@ inquirer.prompt (
                 }
         },
 
-
-        /*  */
-
     ]
 )
 
@@ -146,37 +132,77 @@ inquirer.prompt (
     installation,
     usage,
     license,
+    licenseBadge,
     contributing,
     github,
     email
 }) => {
 
+    function License(type, badge) {
+        this.type = type;
+        this.badge = badge;
+    }
+
+    License.prototype.changeBadge = function() {
+        licenseBadge = this.badge
+    }
+
+    if (license = "MIT License") {
+        var mit = new License("MIT", "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)" )
+        mit.changeBadge();
+    }
+
+
+/* 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
+[![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+
+*/
+
+
+
+
+
+
+
 const template =`
-    #${title}
+# ${title}
 
-    ##${description}
+## ${description}
 
-    ## Table of Contents
-    1. [General Info](#general)
-    2. [Technologies](#technologies)
-    3. [Installation](#installation)
-    4. [Collaboration](#collaboration)
-    5. [Contact](#contact) */
+## Table of Contents
+1. [General Info](#general)
+2. [Technologies](#technologies)
+3. [Installation](#installation)
+4. [Collaboration](#collaboration)
+5. [Contact](#contact) 
 
-    ##Installaton
-    *${installation}*
+# Installaton
+*${installation}*
 
-    ##Usage
-    *${usage}*
+# Usage
+*${usage}*
 
-    ## License
-    *${license}*
+# License
+*${license}*
+${licenseBadge}
 
-    ##Contributing
-    *${contributing}*
+# Contributing
+*${contributing}*
 
-    ## Github: 
-    [Link](https://github.com/${github})`;
+# Contact: 
+[Link](https://github.com/${github})
+Email: ${email}`;
 
     createReadmeFile(title, template)
 });
@@ -213,3 +239,4 @@ fs.writeFile(`./generated-${fileName.toLowerCase().split(' ').join('')}.md`,data
 
 //WHEN I click on the links in the Table of Contents
 //THEN I am taken to the corresponding section of the README
+
