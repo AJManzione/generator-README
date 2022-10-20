@@ -1,15 +1,15 @@
 //WHEN I am prompted for information about my application repository
 //THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions --
 
-// title
-// description
-// table of contents
-// installation
-// usage
-// license
-// contributing
-// tests
-// questions
+// title  (check)
+// description (check)
+// table of contents 
+// installation   (check)
+// usage    (check)
+// license   (check)
+// contributing  (check)
+// tests   ()
+// questions    ()
 
 
 //--- node modules ---
@@ -34,9 +34,23 @@ inquirer.prompt (
             name: 'title',
             validate: (value) => { 
                 if(value){return true} 
-                else {return 'i need a value to continue'}
+                else {return "i need a value to continue"}
             }
         },
+
+
+            /* DESCRIPTION */
+        {
+            type: 'input',
+            message: 'Enter a description',
+            name: 'description',
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
+            }
+        },
+
+        
 
 
             /* LICENSE */
@@ -51,7 +65,40 @@ inquirer.prompt (
             choices: ['Apache License 2.0', 'GNU General Public License v3.0', 'MIT License', 'BSD 2-Clause "Simplified" License', 'BSD 3-Clause "New" or "Revised" License', 'Boost Software License 1.0', 'Creative Commons Zero v1.0 Universal', 'Eclipse Public License 2.0', 'GNU Affero General Public License v3.0', 'GNU General Public License v2.0', 'GNU Lesser General Public License v2.1', 'Mozilla Public License 2.0', 'The Unlicense'],
             validate: (value) => { 
                 if(value){return true} 
-                else {return 'i need a value to continue'}
+                else {return "i need a value to continue"}
+            }
+        },
+
+            /* INSTALLATION */
+        {
+            type: 'input',
+            message: "How do you install this program?",
+            name: 'installation',
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
+            }
+        },
+
+            /* USAGE */
+        {
+            type: 'input',
+            message: "How can this project be used?",
+            name: 'usage',
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
+                }
+        },
+
+            /* CONTRIBUTING */
+        {
+            type: 'input',
+            message: "Who contributed to this project?",
+            name: 'contributing',
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
                 }
         },
 
@@ -66,13 +113,14 @@ inquirer.prompt (
             name: 'github',
             validate: (value) => { 
                 if(value){return true} 
-                else {return 'i need a value to continue'}
+                else {return "i need a value to continue"}
                 }
         },
         
 
 
             /* EMAIL ADDRESS */
+
 //WHEN I enter my email address
 //THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
           
@@ -82,18 +130,23 @@ inquirer.prompt (
             name: 'email',
             validate: (value) => { 
                 if(value){return true} 
-                else {return 'i need a value to continue'}
+                else {return "i need a value to continue"}
                 }
         },
 
 
+        /*  */
 
     ]
 )
 
 .then(({
     title,
+    description,
+    installation,
+    usage,
     license,
+    contributing,
     github,
     email
 }) => {
@@ -101,10 +154,26 @@ inquirer.prompt (
 const template =`
     #${title}
 
-    ##
+    ##${description}
+
+    ## Table of Contents
+    1. [General Info](#general)
+    2. [Technologies](#technologies)
+    3. [Installation](#installation)
+    4. [Collaboration](#collaboration)
+    5. [Contact](#contact) */
+
+    ##Installaton
+    *${installation}*
+
+    ##Usage
+    *${usage}*
 
     ## License
-    ${license}
+    *${license}*
+
+    ##Contributing
+    *${contributing}*
 
     ## Github: 
     [Link](https://github.com/${github})`;
