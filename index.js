@@ -104,6 +104,18 @@ inquirer.prompt (
                 }
         },
 
+            /* TESTS */
+
+        {
+            type: 'input',
+            message: "Have you ran any tests?",
+            name: 'tests',
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
+                }
+        },
+
             /* GITHUB USERNAME */
 
         {
@@ -140,6 +152,7 @@ inquirer.prompt (
     license,
     licenseBadge,
     contributing,
+    tests,
     github,
     email
 }) => {
@@ -270,6 +283,11 @@ ${licenseBadge}
 
 # Contact: 
 [GitHub](https://github.com/${github})
+
+# Tests:
+*${tests}*
+
+# Questions:
 Email: ${email}`;
 
     createReadmeFile(title, template)
