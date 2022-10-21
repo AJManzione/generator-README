@@ -1,7 +1,5 @@
 //WHEN I am prompted for information about my application repository
 //THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions --
-//WHEN I choose a license for my application from a list of options
-//THEN a badge for that license is added near the top of the README 
 
 // title  (check)
 // description (check)
@@ -52,7 +50,6 @@ inquirer.prompt (
 
             /* LICENSE */
 
-
         {
             type: 'list',
             message: "What license did you use?",
@@ -64,6 +61,18 @@ inquirer.prompt (
             }
         },
 
+            /* TECHNOLOGIES */
+        {
+            type: 'checkbox',
+            message: "What technologies did you use?",
+            name: 'technologies',
+            choices: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery', 'React', 'Next.js', 'Vue.js', 'Angular.js', 'Svelte', 'Laravel'],
+            validate: (value) => { 
+                if(value){return true} 
+                else {return "i need a value to continue"}
+            }
+
+        },
             /* INSTALLATION */
         {
             type: 'input',
@@ -97,9 +106,7 @@ inquirer.prompt (
                 }
         },
 
-
             /* GITHUB USERNAME */
-
 
         {
             type: 'input',
@@ -129,6 +136,8 @@ inquirer.prompt (
 .then(({
     title,
     description,
+    technologies,
+    techBadge,
     installation,
     usage,
     license,
@@ -139,18 +148,21 @@ inquirer.prompt (
 }) => {
 
 
-        /* CONSTRUCTOR AND PROTOTYPE*/
-//License constructor ready to take in new input
-    function License(badge) {
-        this.badge = badge;
-    };
-
-    License.prototype.changeBadge = function() {
-        licenseBadge = this.badge
-    };
 
 
 /*--------------------------------- LICENSE BADGE SELECTOR -------------- */
+
+// CONSTRUCTOR AND PROTOTYPE
+
+function License(badge) {
+    this.badge = badge;
+};
+
+License.prototype.changeBadge = function() {
+    licenseBadge = this.badge
+};
+
+// Conditional LICENSE BADGE APPENDING
 
             // Apache Badge
     if (license === "Apache License 2.0") {
@@ -189,7 +201,7 @@ inquirer.prompt (
     };
 
             // Eclipse Badge
-    if (license === "Creative Commons Zero v1.0 Universal") {
+    if (license === "Eclipse Public License 1.0") {
         var eclipse = new License("[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)")
         eclipse.changeBadge();
     };
@@ -230,7 +242,34 @@ inquirer.prompt (
         unlicense.changeBadge();
     };
 
+
+/*------------------------ TECHNOLOGIES BADGE SELECTOR -------------- */
+
+// CONSTRUCTOR AND PROTOTYPE
+
+function Technologies(badge) {
+    this.badge = badge;
+};
+
+Technologies.prototype.addBadge = function() {
+    techBadge = this.badge
+};
+
+// Conditional TECHNOLOGIES BADGE APPENDING
+
+
+for (i = 0; i < technologies.length; i++) {
+    if (technologies[i] = "HTML") {
+        var html = new Technologies("![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)")
+        html.addBadge(); 
+    }
+}
+
+
+
+        /* TEMPLATE */
 const template =`
+${licenseBadge}
 # ${title}
 
 ## ${description}
@@ -239,8 +278,11 @@ const template =`
 1. [General Info](#general)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
-4. [Collaboration](#collaboration)
+4. [Collaboration](#contributing)
 5. [Contact](#contact) 
+
+# Technologies
+*${techBadge}*
 
 # Installaton
 *${installation}*
@@ -250,13 +292,12 @@ const template =`
 
 # License
 *${license}*
-${licenseBadge}
 
 # Contributing
 *${contributing}*
 
 # Contact: 
-[Link](https://github.com/${github})
+[GitHub](https://github.com/${github})
 Email: ${email}`;
 
     createReadmeFile(title, template)
@@ -272,26 +313,4 @@ fs.writeFile(`./generated-${fileName.toLowerCase().split(' ').join('')}.md`,data
 })
 
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//WHEN I click on the links in the Table of Contents
-//THEN I am taken to the corresponding section of the README
 
