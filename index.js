@@ -66,7 +66,19 @@ inquirer.prompt (
             type: 'checkbox',
             message: "What technologies did you use?",
             name: 'technologies',
-            choices: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery', 'React', 'Node.js', 'MySQL', 'Git', 'GitHub', 'MongoDB'],
+            choices: [ 
+                { name:'HTML', value:'HTML'},
+                { name:'CSS', value:'CSS'},
+                { name:'JavaScript', value:'JavaScript'},
+                { name:'Bootstrap', value:'Bootstrap'},
+                { name:'JQuery', value:'JQuery'},
+                { name:'React', value:'React'},
+                { name:'NodeJS', value:'Node.js'},
+                { name:'MySQL', value:'MySQL'},
+                { name:'Git', value:'Git'},
+                { name:'GitHub', value:'GitHub'},
+                { name:'MongoDB', value:'MongoDB'}
+            ],
             validate: (value) => { 
                 if(value){return true} 
                 else {return "i need a value to continue"}
@@ -137,7 +149,7 @@ inquirer.prompt (
     title,
     description,
     technologies,
-    techBadge,
+    techUsed,
     installation,
     usage,
     license,
@@ -147,7 +159,7 @@ inquirer.prompt (
     email
 }) => {
 
-
+    console.log(technologies);
 
 
 /*--------------------------------- LICENSE BADGE SELECTOR -------------- */
@@ -243,71 +255,6 @@ License.prototype.changeBadge = function() {
     };
 
 
-/*------------------------ TECHNOLOGIES BADGE SELECTOR -------------- */
-
-// CONSTRUCTOR AND PROTOTYPE
-
-function Technologies(badge) {
-    this.badge = badge;
-};
-
-Technologies.prototype.addBadge = function() {
-    techBadge = this.badge
-};
-
-// Conditional TECHNOLOGIES BADGE APPENDING
-
-for (i = 0; i < technologies.length; i++) {
-    if (technologies[i] = "HTML") {
-        var html = new Technologies("![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)")
-        html.addBadge(); 
-    }
-    if (technologies[i] = "CSS") {
-        var css = new Technologies("![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)")
-        css.addBadge(); 
-    }
-    if (technologies[i] = "JavaScript") {
-        var js = new Technologies("![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)")
-        js.addBadge(); 
-    }
-    if (technologies[i] = "Bootstrap") {
-        var bs = new Technologies("![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)")
-        bs.addBadge(); 
-    }
-    if (technologies[i] = "JQuery") {
-        var jq = new Technologies("![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)")
-        jq.addBadge(); 
-    }
-    if (technologies[i] = "React") {
-        var react = new Technologies("![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)")
-        react.addBadge(); 
-    }
-    if (technologies[i] = "Node.js") {
-        var node = new Technologies("![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)")
-        node.addBadge(); 
-    }
-    if (technologies[i] = "MySQL") {
-        var mySQL = new Technologies("![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)")
-        mySQL.addBadge(); 
-    }
-    if (technologies[i] = "Git") {
-        var git = new Technologies("![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white))")
-        git.addBadge(); 
-    }
-    if (technologies[i] = "GitHub") {
-        var gitHub = new Technologies("![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)")
-        gutHub.addBadge(); 
-    }
-    if (technologies[i] = "MongoDB") {
-        var mongoDB = new Technologies("![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)")
-        mongoDB.addBadge(); 
-    }
-    
-
-
-}
-
-
 
         /* TEMPLATE */
 const template =`
@@ -324,7 +271,7 @@ ${licenseBadge}
 5. [Contact](#contact) 
 
 # Technologies
-*${techBadge}*
+*${technologies}*
 
 # Installaton
 *${installation}*
