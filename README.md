@@ -12,7 +12,7 @@
 5. [Contact](#contact) 
 
 # Technologies
-*HTML,JavaScript,Node.js,Git,GitHub*
+JavaScript,Node.js,Git,GitHub*
 
 # Installaton
 *You can install the program by first downloading the code and then doing a "npm install  inquire"*
