@@ -4,6 +4,9 @@
 
 ## A command line prompt based program that takes in user input and generates a README markdown file with the criteria provided.
 
+## Working example!
+![example](/assets/images/README_Generator_Example.gif)
+
 ## Table of Contents
 1. [General Info](#general)
 2. [Technologies](#technologies)
