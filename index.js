@@ -149,7 +149,6 @@ inquirer.prompt (
     title,
     description,
     technologies,
-    techUsed,
     installation,
     usage,
     license,
