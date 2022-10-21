@@ -1,0 +1,25 @@
+{
+  "name": "generator-readme",
+  "version": "1.0.0",
+  "description": "## A terminal readme generaor that takes in user input and outputs a README.md file!",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJManzione/generator-README.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJManzione/generator-README/issues"
+  },
+  "homepage": "https://github.com/AJManzione/generator-README#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4",
+    "type": "module"
+  }
+}

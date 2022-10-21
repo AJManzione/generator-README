@@ -1,24 +1,10 @@
-//WHEN I am prompted for information about my application repository
-//THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions --
-
-// title  (check)
-// description (check)
-// table of contents 
-// installation   (check)
-// usage    (check)
-// license   (check)
-// contributing  (check)
-// tests   ()
-// questions  ()
-
-
 //--- node modules ---
 
 // Allows inquirer to be used in program - 
-const inquirer = require('inquirer');
+import inquirer from 'inquirer';
 // Allows filesave to be used in program - 
-const fs = require('fs');
-const { type } = require('os');
+import fs from 'fs';
+
 
 
 
@@ -157,8 +143,6 @@ inquirer.prompt (
     github,
     email
 }) => {
-
-    console.log(technologies);
 
 
 /*--------------------------------- LICENSE BADGE SELECTOR -------------- */
