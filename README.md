@@ -13,6 +13,7 @@
 5. [Contact](#contact) 
 
 ## Working example!
+![Full Walkthrough](assets/images/README_Generator_Example.gif)
 ![example](assets/images/README_Generator_Example.gif)
 
 # Technologies
